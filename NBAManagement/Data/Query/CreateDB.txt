@@ -1,0 +1,528 @@
+USE [master]
+GO
+/****** Object:  Database [BasketballSystem]    Script Date: 23.04.2018 20:47:40 ******/
+CREATE DATABASE [BasketballSystem]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'BasketballSystem', FILENAME = N'D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\BasketballSystem.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'BasketballSystem_log', FILENAME = N'D:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\BasketballSystem_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 0)
+GO
+ALTER DATABASE [BasketballSystem] SET COMPATIBILITY_LEVEL = 140
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [BasketballSystem].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [BasketballSystem] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [BasketballSystem] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [BasketballSystem] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [BasketballSystem] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [BasketballSystem] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET RECOVERY FULL 
+GO
+ALTER DATABASE [BasketballSystem] SET  MULTI_USER 
+GO
+ALTER DATABASE [BasketballSystem] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [BasketballSystem] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [BasketballSystem] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [BasketballSystem] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [BasketballSystem] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'BasketballSystem', N'ON'
+GO
+ALTER DATABASE [BasketballSystem] SET QUERY_STORE = OFF
+GO
+USE [BasketballSystem]
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE = ON;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET LEGACY_CARDINALITY_ESTIMATION = PRIMARY;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET MAXDOP = 0;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET MAXDOP = PRIMARY;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SNIFFING = ON;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET PARAMETER_SNIFFING = PRIMARY;
+GO
+ALTER DATABASE SCOPED CONFIGURATION SET QUERY_OPTIMIZER_HOTFIXES = OFF;
+GO
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET QUERY_OPTIMIZER_HOTFIXES = PRIMARY;
+GO
+USE [BasketballSystem]
+GO
+/****** Object:  Table [dbo].[ActionType]    Script Date: 23.04.2018 20:47:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ActionType](
+	[ActionTypeId] [varchar](50) NOT NULL,
+	[Name] [varchar](50) NULL,
+ CONSTRAINT [PK_ActionType] PRIMARY KEY CLUSTERED 
+(
+	[ActionTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Admin]    Script Date: 23.04.2018 20:47:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Admin](
+	[Jobnumber] [varchar](50) NOT NULL,
+	[Name] [varchar](50) NULL,
+	[Password] [varchar](50) NULL,
+	[Gender] [varchar](50) NULL,
+	[DateOfBirth] [datetime] NULL,
+	[Phone] [varchar](50) NULL,
+	[Email] [varchar](50) NULL,
+	[RoleId] [varchar](50) NULL,
+ CONSTRAINT [PK_Admin] PRIMARY KEY CLUSTERED 
+(
+	[Jobnumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Conference]    Script Date: 23.04.2018 20:47:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Conference](
+	[ConferenceId] [varchar](50) NOT NULL,
+	[Name] [varchar](50) NULL,
+ CONSTRAINT [PK_Conference] PRIMARY KEY CLUSTERED 
+(
+	[ConferenceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Country]    Script Date: 23.04.2018 20:47:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Country](
+	[CountryCode] [varchar](50) NOT NULL,
+	[CountryName] [varchar](50) NULL,
+ CONSTRAINT [PK_Country] PRIMARY KEY CLUSTERED 
+(
+	[CountryCode] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Division]    Script Date: 23.04.2018 20:47:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Division](
+	[DivisionId] [varchar](50) NOT NULL,
+	[Name] [varchar](50) NULL,
+	[ConferenceId] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Division] PRIMARY KEY CLUSTERED 
+(
+	[DivisionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Matchup]    Script Date: 23.04.2018 20:47:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Matchup](
+	[MatchupId] [varchar](50) NOT NULL,
+	[SeasonId] [varchar](50) NOT NULL,
+	[MatchupTypeId] [varchar](50) NOT NULL,
+	[Team_AwayId] [varchar](50) NOT NULL,
+	[Team_HomeId] [varchar](50) NOT NULL,
+	[Starttime] [datetime] NULL,
+	[Team_Away_Score] [int] NULL,
+	[Team_Home_Score] [int] NULL,
+	[Location] [varchar](50) NULL,
+	[Status] [varchar](50) NULL,
+	[CurrentQuarter] [int] NULL,
+ CONSTRAINT [PK_Matchup] PRIMARY KEY CLUSTERED 
+(
+	[MatchupId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MatchupDetail]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MatchupDetail](
+	[Id] [varchar](50) NOT NULL,
+	[MatchupId] [varchar](50) NOT NULL,
+	[Quarter] [int] NULL,
+	[Team_Away_Score] [int] NULL,
+	[Team_Home_Score] [int] NULL,
+ CONSTRAINT [PK_MatchupDetail] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MatchupLog]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MatchupLog](
+	[Id] [varchar](50) NOT NULL,
+	[MatchupId] [varchar](50) NOT NULL,
+	[Quarter] [int] NULL,
+	[OccurTime] [date] NULL,
+	[TeamId] [varchar](50) NOT NULL,
+	[PlayerId] [varchar](50) NOT NULL,
+	[ActionTypeId] [varchar](50) NOT NULL,
+	[Remark] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MatchupType]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MatchupType](
+	[MatchupTypeId] [varchar](50) NOT NULL,
+	[Name] [varchar](50) NULL,
+ CONSTRAINT [PK_MatchupType] PRIMARY KEY CLUSTERED 
+(
+	[MatchupTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Pictures]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pictures](
+	[Id] [varchar](50) NOT NULL,
+	[Img] [image] NULL,
+	[Description] [varchar](50) NULL,
+	[NumberOfLike] [int] NULL,
+	[CreateTime] [datetime] NULL,
+ CONSTRAINT [PK_Pictures] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Player]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Player](
+	[PlayerId] [varchar](50) NOT NULL,
+	[Name] [varchar](50) NULL,
+	[PositionId] [varchar](50) NOT NULL,
+	[JoinYear] [datetime] NULL,
+	[Height] [int] NULL,
+	[Weight] [int] NULL,
+	[DateOfBirth] [datetime] NULL,
+	[College] [varchar](50) NULL,
+	[CountryCode] [varchar](50) NOT NULL,
+	[Img] [image] NULL,
+	[IsRetirment] [bit] NULL,
+	[RetirementTime] [date] NULL,
+ CONSTRAINT [PK_Player] PRIMARY KEY CLUSTERED 
+(
+	[PlayerId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PlayerInTeamId]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PlayerInTeamId](
+	[PlayerInTeamId] [varchar](50) NOT NULL,
+	[PlayerId] [varchar](50) NOT NULL,
+	[TeamId] [varchar](50) NOT NULL,
+	[SeasonId] [varchar](50) NOT NULL,
+	[ShirtNumber] [varchar](50) NULL,
+	[Salary] [varchar](50) NULL,
+	[StarterIndex] [int] NULL,
+ CONSTRAINT [PK_PlayerInTeamId] PRIMARY KEY CLUSTERED 
+(
+	[PlayerInTeamId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PlayerStatistics]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PlayerStatistics](
+	[Id] [varchar](50) NOT NULL,
+	[MatchupId] [varchar](50) NOT NULL,
+	[TeamId] [varchar](50) NOT NULL,
+	[PlayerId] [varchar](50) NOT NULL,
+	[IsStarting] [bit] NULL,
+	[Min] [int] NULL,
+	[Point] [int] NULL,
+	[Assist] [int] NULL,
+	[FieldGoalMade] [int] NULL,
+	[FieldGoalMissed] [int] NULL,
+	[PointFieldGoalMade] [int] NULL,
+	[PointFieldGoalMissed] [int] NULL,
+	[FreeThrowMade] [int] NULL,
+	[FreeThrowMissed] [int] NULL,
+	[Rebound] [int] NULL,
+	[OFFR] [int] NULL,
+	[DFFR] [int] NULL,
+	[Steal] [int] NULL,
+	[Block] [int] NULL,
+	[Turnover] [int] NULL,
+	[Foul] [int] NULL,
+ CONSTRAINT [PK_PlayerStatistics] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Position]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Position](
+	[PositionId] [varchar](50) NOT NULL,
+	[Name] [varchar](50) NULL,
+	[Abbr] [varchar](50) NULL,
+ CONSTRAINT [PK_Position] PRIMARY KEY CLUSTERED 
+(
+	[PositionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PostSeason]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PostSeason](
+	[TeamId] [varchar](50) NOT NULL,
+	[SeasonId] [varchar](50) NOT NULL,
+	[Rank] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Role]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Role](
+	[RoleId] [varchar](50) NOT NULL,
+	[RoleName] [varchar](50) NULL,
+ CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Season]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Season](
+	[SeasonId] [varchar](50) NOT NULL,
+	[SeasonName] [varchar](50) NULL,
+ CONSTRAINT [PK_Season] PRIMARY KEY CLUSTERED 
+(
+	[SeasonId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Team]    Script Date: 23.04.2018 20:47:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Team](
+	[TeamId] [varchar](50) NOT NULL,
+	[TeamName] [varchar](50) NULL,
+	[DivisionId] [varchar](50) NOT NULL,
+	[Coach] [varchar](50) NULL,
+	[Abbr] [varchar](50) NULL,
+	[Stadium] [varchar](50) NULL,
+	[Logo] [image] NULL,
+ CONSTRAINT [PK_Team] PRIMARY KEY CLUSTERED 
+(
+	[TeamId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Admin]  WITH CHECK ADD  CONSTRAINT [FK_Admin_Role] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Role] ([RoleId])
+GO
+ALTER TABLE [dbo].[Admin] CHECK CONSTRAINT [FK_Admin_Role]
+GO
+ALTER TABLE [dbo].[Division]  WITH CHECK ADD  CONSTRAINT [FK_Division_Conference] FOREIGN KEY([ConferenceId])
+REFERENCES [dbo].[Conference] ([ConferenceId])
+GO
+ALTER TABLE [dbo].[Division] CHECK CONSTRAINT [FK_Division_Conference]
+GO
+ALTER TABLE [dbo].[Matchup]  WITH CHECK ADD  CONSTRAINT [FK_Matchup_MatchupType] FOREIGN KEY([MatchupTypeId])
+REFERENCES [dbo].[MatchupType] ([MatchupTypeId])
+GO
+ALTER TABLE [dbo].[Matchup] CHECK CONSTRAINT [FK_Matchup_MatchupType]
+GO
+ALTER TABLE [dbo].[Matchup]  WITH CHECK ADD  CONSTRAINT [FK_Matchup_Season] FOREIGN KEY([SeasonId])
+REFERENCES [dbo].[Season] ([SeasonId])
+GO
+ALTER TABLE [dbo].[Matchup] CHECK CONSTRAINT [FK_Matchup_Season]
+GO
+ALTER TABLE [dbo].[Matchup]  WITH CHECK ADD  CONSTRAINT [FK_Matchup_Team] FOREIGN KEY([Team_AwayId])
+REFERENCES [dbo].[Team] ([TeamId])
+GO
+ALTER TABLE [dbo].[Matchup] CHECK CONSTRAINT [FK_Matchup_Team]
+GO
+ALTER TABLE [dbo].[Matchup]  WITH CHECK ADD  CONSTRAINT [FK_Matchup_Team1] FOREIGN KEY([Team_HomeId])
+REFERENCES [dbo].[Team] ([TeamId])
+GO
+ALTER TABLE [dbo].[Matchup] CHECK CONSTRAINT [FK_Matchup_Team1]
+GO
+ALTER TABLE [dbo].[MatchupDetail]  WITH CHECK ADD  CONSTRAINT [FK_MatchupDetail_Matchup] FOREIGN KEY([MatchupId])
+REFERENCES [dbo].[Matchup] ([MatchupId])
+GO
+ALTER TABLE [dbo].[MatchupDetail] CHECK CONSTRAINT [FK_MatchupDetail_Matchup]
+GO
+ALTER TABLE [dbo].[MatchupLog]  WITH CHECK ADD  CONSTRAINT [FK_MatchupLog_ActionType] FOREIGN KEY([ActionTypeId])
+REFERENCES [dbo].[ActionType] ([ActionTypeId])
+GO
+ALTER TABLE [dbo].[MatchupLog] CHECK CONSTRAINT [FK_MatchupLog_ActionType]
+GO
+ALTER TABLE [dbo].[MatchupLog]  WITH CHECK ADD  CONSTRAINT [FK_MatchupLog_Matchup] FOREIGN KEY([MatchupId])
+REFERENCES [dbo].[Matchup] ([MatchupId])
+GO
+ALTER TABLE [dbo].[MatchupLog] CHECK CONSTRAINT [FK_MatchupLog_Matchup]
+GO
+ALTER TABLE [dbo].[MatchupLog]  WITH CHECK ADD  CONSTRAINT [FK_MatchupLog_Player] FOREIGN KEY([PlayerId])
+REFERENCES [dbo].[Player] ([PlayerId])
+GO
+ALTER TABLE [dbo].[MatchupLog] CHECK CONSTRAINT [FK_MatchupLog_Player]
+GO
+ALTER TABLE [dbo].[MatchupLog]  WITH CHECK ADD  CONSTRAINT [FK_MatchupLog_Team] FOREIGN KEY([TeamId])
+REFERENCES [dbo].[Team] ([TeamId])
+GO
+ALTER TABLE [dbo].[MatchupLog] CHECK CONSTRAINT [FK_MatchupLog_Team]
+GO
+ALTER TABLE [dbo].[Player]  WITH CHECK ADD  CONSTRAINT [FK_Player_Country] FOREIGN KEY([CountryCode])
+REFERENCES [dbo].[Country] ([CountryCode])
+GO
+ALTER TABLE [dbo].[Player] CHECK CONSTRAINT [FK_Player_Country]
+GO
+ALTER TABLE [dbo].[Player]  WITH CHECK ADD  CONSTRAINT [FK_Player_Position] FOREIGN KEY([PositionId])
+REFERENCES [dbo].[Position] ([PositionId])
+GO
+ALTER TABLE [dbo].[Player] CHECK CONSTRAINT [FK_Player_Position]
+GO
+ALTER TABLE [dbo].[PlayerInTeamId]  WITH CHECK ADD  CONSTRAINT [FK_PlayerInTeamId_Player] FOREIGN KEY([PlayerId])
+REFERENCES [dbo].[Player] ([PlayerId])
+GO
+ALTER TABLE [dbo].[PlayerInTeamId] CHECK CONSTRAINT [FK_PlayerInTeamId_Player]
+GO
+ALTER TABLE [dbo].[PlayerInTeamId]  WITH CHECK ADD  CONSTRAINT [FK_PlayerInTeamId_Season] FOREIGN KEY([SeasonId])
+REFERENCES [dbo].[Season] ([SeasonId])
+GO
+ALTER TABLE [dbo].[PlayerInTeamId] CHECK CONSTRAINT [FK_PlayerInTeamId_Season]
+GO
+ALTER TABLE [dbo].[PlayerInTeamId]  WITH CHECK ADD  CONSTRAINT [FK_PlayerInTeamId_Team] FOREIGN KEY([TeamId])
+REFERENCES [dbo].[Team] ([TeamId])
+GO
+ALTER TABLE [dbo].[PlayerInTeamId] CHECK CONSTRAINT [FK_PlayerInTeamId_Team]
+GO
+ALTER TABLE [dbo].[PlayerStatistics]  WITH CHECK ADD  CONSTRAINT [FK_PlayerStatistics_Matchup] FOREIGN KEY([MatchupId])
+REFERENCES [dbo].[Matchup] ([MatchupId])
+GO
+ALTER TABLE [dbo].[PlayerStatistics] CHECK CONSTRAINT [FK_PlayerStatistics_Matchup]
+GO
+ALTER TABLE [dbo].[PlayerStatistics]  WITH CHECK ADD  CONSTRAINT [FK_PlayerStatistics_Player] FOREIGN KEY([PlayerId])
+REFERENCES [dbo].[Player] ([PlayerId])
+GO
+ALTER TABLE [dbo].[PlayerStatistics] CHECK CONSTRAINT [FK_PlayerStatistics_Player]
+GO
+ALTER TABLE [dbo].[PlayerStatistics]  WITH CHECK ADD  CONSTRAINT [FK_PlayerStatistics_Team] FOREIGN KEY([TeamId])
+REFERENCES [dbo].[Team] ([TeamId])
+GO
+ALTER TABLE [dbo].[PlayerStatistics] CHECK CONSTRAINT [FK_PlayerStatistics_Team]
+GO
+ALTER TABLE [dbo].[PostSeason]  WITH CHECK ADD  CONSTRAINT [FK_PostSeason_Season] FOREIGN KEY([SeasonId])
+REFERENCES [dbo].[Season] ([SeasonId])
+GO
+ALTER TABLE [dbo].[PostSeason] CHECK CONSTRAINT [FK_PostSeason_Season]
+GO
+ALTER TABLE [dbo].[PostSeason]  WITH CHECK ADD  CONSTRAINT [FK_PostSeason_Team] FOREIGN KEY([TeamId])
+REFERENCES [dbo].[Team] ([TeamId])
+GO
+ALTER TABLE [dbo].[PostSeason] CHECK CONSTRAINT [FK_PostSeason_Team]
+GO
+ALTER TABLE [dbo].[Team]  WITH CHECK ADD  CONSTRAINT [FK_Team_Division] FOREIGN KEY([DivisionId])
+REFERENCES [dbo].[Division] ([DivisionId])
+GO
+ALTER TABLE [dbo].[Team] CHECK CONSTRAINT [FK_Team_Division]
+GO
+USE [master]
+GO
+ALTER DATABASE [BasketballSystem] SET  READ_WRITE 
+GO

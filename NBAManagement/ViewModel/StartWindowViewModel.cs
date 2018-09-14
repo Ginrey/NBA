@@ -18,7 +18,7 @@ namespace NBAManagement.ViewModel
 
         List<Pictures> listImages;
         public ICommand MoveLeftClickCommand { get; set; }
-        public ICommand MoveRightClickCommand { get; set; }
+        public ICommand MoveRightClickCommand { get; set; } 
         public ICommand OpenVisitorForm { get; set; }
         int index = 0;
         public StartWindowViewModel()
